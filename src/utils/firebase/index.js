@@ -2,9 +2,10 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
+  // signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -30,15 +31,27 @@ const firebaseApp = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 
 // initalizing the provider
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
   prompt: "select_account",
 });
 
 export const auth = getAuth();
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+// sign in providers
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+
+// for Redirect
+// export const signInWithGoogleRedirect = () =>
+//   signInWithRedirect(auth, googleProvider);
+
+// creating user
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalFields = {}
+) => {
   // check for the reference
   const userDocRef = doc(db, "users", userAuth.uid);
 
@@ -52,6 +65,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalFields,
       });
     } catch (err) {
       console.error("Error creating user", err);
@@ -60,4 +74,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   return userDocRef;
 };
 
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+// create auth user with email, password
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
