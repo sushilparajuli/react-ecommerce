@@ -3,12 +3,12 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 25px;
+  margin-bottom: 1.5rem;
 
   .logo-container {
     height: 100%;
     width: 70px;
-    padding: 25px;
+    padding: 0.5rem;
   }
 
   .nav-links-container {
@@ -19,7 +19,7 @@
     justify-content: flex-end;
 
     .nav-link {
-      padding: 10px 15px;
+      padding: 0.6rem 0.9rem;
       cursor: pointer;
     }
   }

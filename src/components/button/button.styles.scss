@@ -1,3 +1,5 @@
+$google_plus : #DB4437;
+
 .button-container {
   min-width: 165px;
   width: auto;
@@ -15,6 +17,7 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
+  transition: all 0.2s ease-in-out ;
 
   &:hover {
     background-color: white;
@@ -23,12 +26,14 @@
   }
 
   &.google-sign-in {
-    background-color: #4285f4;
-    color: white;
+    background-color: transparent;
+    border: 1px $google_plus solid;
+    color:  $google_plus;
 
     &:hover {
-      background-color: #357ae8;
-      border: none;
+      background-color: darken($google_plus,10);
+      border-color: darken($google_plus,20);
+      color: white;
     }
   }
 
@@ -40,7 +45,14 @@
     &:hover {
       background-color: black;
       color: white;
-      border: none;
     }
+  }
+  
+  svg{
+    font-size: 2rem;
+    display: inline-flex;
+    justify-self: center;
+    align-self: center;
+    margin: 0.2rem;
   }
 }
