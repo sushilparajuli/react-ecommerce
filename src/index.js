@@ -5,7 +5,7 @@ import "./index.scss";
 import App from "./App";
 
 import { UserProvider } from "./contexts/user.context";
-import { ProductProvider } from "./contexts/products.context";
+import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 
 const rootElement = document.getElementById("root");
@@ -15,11 +15,11 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <ProductProvider>
+        <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
-        </ProductProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>

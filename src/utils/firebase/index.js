@@ -15,7 +15,16 @@ import {
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // import firestore config
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -41,6 +50,26 @@ googleProvider.setCustomParameters({
 
 export const auth = getAuth();
 export const db = getFirestore();
+
+// add Collection and documents
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  // collection reference
+  const collectionRef = collection(db, collectionKey);
+
+  // writing data in datastore
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  // commit all documents
+  await batch.commit();
+  console.log("uploaded to firestore");
+};
 
 // sign in providers
 export const signInWithGooglePopup = () =>
@@ -75,6 +104,23 @@ export const createUserDocumentFromAuth = async (
     }
   }
   return userDocRef;
+};
+
+// getting collection and docs from firestore
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  console.log("get docs", categoryMap);
+
+  return categoryMap;
 };
 
 // create auth user with email, password
