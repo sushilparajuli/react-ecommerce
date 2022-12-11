@@ -3,21 +3,22 @@ $google_plus : #DB4437;
 .button-container {
   min-width: 165px;
   width: auto;
-  height: 50px;
+  height: 3rem;
   letter-spacing: 0.5px;
-  line-height: 50px;
-  padding: 0 35px 0 35px;
+  line-height: 3rem;
+  padding: 0 1rem;
   font-size: 15px;
   background-color: black;
   color: white;
   text-transform: uppercase;
   font-family: 'Poppins';
-  font-weight: bolder;
+  font-weight: 400;
   border: none;
   cursor: pointer;
   display: flex;
   justify-content: center;
   transition: all 0.2s ease-in-out ;
+  letter-spacing: 0.02rem;
 
   &:hover {
     background-color: white;

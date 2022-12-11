@@ -5,6 +5,7 @@ import "./index.scss";
 import App from "./App";
 
 import { UserProvider } from "./contexts/user.context";
+import { ProductProvider } from "./contexts/products.context";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
@@ -13,7 +14,9 @@ root.render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <ProductProvider>
+          <App />
+        </ProductProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>

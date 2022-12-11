@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Brown Brim",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,fashion,hat",
+    "price": 25
+  },
+  {
+    "id": 2,
+    "name": "Blue Beanie",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,fashion,cap",
+    "price": 18
+  },
+  {
+    "id": 3,
+    "name": "Brown Cowboy",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,fashion,cowboyhat",
+    "price": 35
+  },
+  {
+    "id": 4,
+    "name": "Grey Brim",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,grey brim",
+    "price": 25
+  },
+  {
+    "id": 5,
+    "name": "Green Beanie",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,green beanie",
+    "price": 18
+  },
+  {
+    "id": 6,
+    "name": "Palm Tree Cap",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,palm tree cap",
+    "price": 14
+  },
+  {
+    "id": 7,
+    "name": "Red Beanie",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,red beanie",
+    "price": 18
+  },
+  {
+    "id": 8,
+    "name": "Wolf Cap",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,fashion,wolfcap",
+    "price": 14
+  },
+  {
+    "id": 9,
+    "name": "Blue Snapback",
+    "imageUrl": "https://source.unsplash.com/1600x900/?clothing,fashion,blue",
+    "price": 16
+  }
+]
