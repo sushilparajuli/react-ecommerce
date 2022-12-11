@@ -2,19 +2,19 @@ import { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
 import "./cart-icon.styles.scss";
 
-import { FaShoppingCart } from "react-icons/fa";
+import { GiShoppingBag } from "react-icons/gi";
 
 const CartIcon = () => {
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { isCartOpen, setIsCartOpen, cartCount } = useContext(CartContext);
 
   const toggleCartOpen = () => {
     setIsCartOpen(!isCartOpen);
   };
 
   return (
-    <div className="cart-icon-container">
-      <FaShoppingCart className="shopping-icon" onClick={toggleCartOpen} />
-      <span>0</span>
+    <div className="cart-icon-container" onClick={toggleCartOpen}>
+      <GiShoppingBag className="shopping-icon" />
+      <span className="item-count">{cartCount}</span>
     </div>
   );
 };
