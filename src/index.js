@@ -12,15 +12,15 @@ const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
-    <StrictMode>
-        <BrowserRouter>
-            <UserProvider>
-                <CategoriesProvider>
-                    <CartProvider>
-                        <App />
-                    </CartProvider>
-                </CategoriesProvider>
-            </UserProvider>
-        </BrowserRouter>
-    </StrictMode>
+  <StrictMode>
+    <BrowserRouter>
+      <UserProvider>
+        <CategoriesProvider>
+          <CartProvider>
+            <App />
+          </CartProvider>
+        </CategoriesProvider>
+      </UserProvider>
+    </BrowserRouter>
+  </StrictMode>
 );

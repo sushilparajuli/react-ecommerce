@@ -1,14 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import {
-    getAuth,
-    // signInWithRedirect,
-    signInWithPopup,
-    GoogleAuthProvider,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
+  getAuth,
+  // signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from 'firebase/auth';
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -16,26 +16,26 @@ import {
 
 // import firestore config
 import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    collection,
-    writeBatch,
-    query,
-    getDocs,
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
 } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: 'AIzaSyB36swqfWKEklmrUBCPKIypgtW9lF39HOE',
-    authDomain: 'react-clothing-170b8.firebaseapp.com',
-    projectId: 'react-clothing-170b8',
-    storageBucket: 'react-clothing-170b8.appspot.com',
-    messagingSenderId: '684499636074',
-    appId: '1:684499636074:web:cd5b3f270eca9dbdf19f13',
-    // measurementId: "G-EYT6GLS485",
+  apiKey: 'AIzaSyB36swqfWKEklmrUBCPKIypgtW9lF39HOE',
+  authDomain: 'react-clothing-170b8.firebaseapp.com',
+  projectId: 'react-clothing-170b8',
+  storageBucket: 'react-clothing-170b8.appspot.com',
+  messagingSenderId: '684499636074',
+  appId: '1:684499636074:web:cd5b3f270eca9dbdf19f13',
+  // measurementId: "G-EYT6GLS485",
 };
 
 // Initialize Firebase
@@ -46,7 +46,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 // initalizing the provider
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
-    prompt: 'select_account',
+  prompt: 'select_account',
 });
 
 export const auth = getAuth();
@@ -54,27 +54,27 @@ export const db = getFirestore();
 
 // add Collection and documents
 export const addCollectionAndDocuments = async (
-    collectionKey,
-    objectsToAdd
+  collectionKey,
+  objectsToAdd
 ) => {
-    // collection reference
-    const collectionRef = collection(db, collectionKey);
+  // collection reference
+  const collectionRef = collection(db, collectionKey);
 
-    // writing data in datastore
-    const batch = writeBatch(db);
-    objectsToAdd.forEach((object) => {
-        const docRef = doc(collectionRef, object.title.toLowerCase());
-        batch.set(docRef, object);
-    });
+  // writing data in datastore
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
 
-    // commit all documents
-    await batch.commit();
-    console.log('uploaded to firestore');
+  // commit all documents
+  await batch.commit();
+  console.log('uploaded to firestore');
 };
 
 // sign in providers
 export const signInWithGooglePopup = () =>
-    signInWithPopup(auth, googleProvider);
+  signInWithPopup(auth, googleProvider);
 
 // for Redirect
 // export const signInWithGoogleRedirect = () =>
@@ -82,60 +82,60 @@ export const signInWithGooglePopup = () =>
 
 // creating user
 export const createUserDocumentFromAuth = async (
-    userAuth,
-    additionalFields = {}
+  userAuth,
+  additionalFields = {}
 ) => {
-    // check for the reference
-    const userDocRef = doc(db, 'users', userAuth.uid);
+  // check for the reference
+  const userDocRef = doc(db, 'users', userAuth.uid);
 
-    // check for the snapshot in db
-    const userSnapshot = await getDoc(userDocRef);
-    if (!userSnapshot.exists()) {
-        const { displayName, email } = userAuth;
-        const createdAt = new Date();
-        try {
-            await setDoc(userDocRef, {
-                displayName,
-                email,
-                createdAt,
-                ...additionalFields,
-            });
-        } catch (err) {
-            console.error('Error creating user', err);
-        }
+  // check for the snapshot in db
+  const userSnapshot = await getDoc(userDocRef);
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalFields,
+      });
+    } catch (err) {
+      console.error('Error creating user', err);
     }
-    return userDocRef;
+  }
+  return userDocRef;
 };
 
 // getting collection and docs from firestore
 export const getCategoriesAndDocuments = async () => {
-    const collectionRef = collection(db, 'categories');
-    const q = query(collectionRef);
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
 
-    const querySnapshot = await getDocs(q);
-    const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-        const { title, items } = docSnapshot.data();
-        acc[title.toLowerCase()] = items;
-        return acc;
-    }, {});
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
 
-    console.log('get docs', categoryMap);
+  console.log('get docs', categoryMap);
 
-    return categoryMap;
+  return categoryMap;
 };
 
 // create auth user with email, password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-    if (!email || !password) return;
-    return await createUserWithEmailAndPassword(auth, email, password);
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-    if (!email || !password) return;
-    return await signInWithEmailAndPassword(auth, email, password);
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
-    onAuthStateChanged(auth, callback);
+  onAuthStateChanged(auth, callback);

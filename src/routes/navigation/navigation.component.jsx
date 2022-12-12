@@ -10,40 +10,40 @@ import { signOutUser } from '../../utils/firebase';
 import './navigation.styles.scss';
 
 const Navigation = () => {
-    const { currentUser } = useContext(UserContext);
-    const { isCartOpen } = useContext(CartContext);
-    console.log('Current User', currentUser);
+  const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
+  console.log('Current User', currentUser);
 
-    const signOutHandler = async () => {
-        await signOutUser();
-    };
+  const signOutHandler = async () => {
+    await signOutUser();
+  };
 
-    return (
-        <>
-            <div className='navigation'>
-                <Link className='logo-container' to="/">
-                    <Logo className="logo" />
-                </Link>
-                <div className="nav-links-container">
-                    <Link className="nav-link" to="/shop">
+  return (
+    <>
+      <div className='navigation'>
+        <Link className='logo-container' to="/">
+          <Logo className="logo" />
+        </Link>
+        <div className="nav-links-container">
+          <Link className="nav-link" to="/shop">
             Shop
-                    </Link>
-                    {currentUser ? (
-                        <span className="nav-link" onClick={signOutHandler}>
+          </Link>
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>
               Sign out
-                        </span>
-                    ) : (
-                        <Link className="nav-link" to="/auth">
+            </span>
+          ) : (
+            <Link className="nav-link" to="/auth">
               Sign In
-                        </Link>
-                    )}
-                    <CartIcon />
-                </div>
-                {isCartOpen && <CartDropdown />}
-            </div>
-            <Outlet />
-        </>
-    );
+            </Link>
+          )}
+          <CartIcon />
+        </div>
+        {isCartOpen && <CartDropdown />}
+      </div>
+      <Outlet />
+    </>
+  );
 };
 
 export default Navigation;
