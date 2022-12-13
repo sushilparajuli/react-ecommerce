@@ -20,14 +20,15 @@ export const BaseButton = styled.button`
   text-transform: uppercase;
   font-family: 'Poppins';
   font-weight: 400;
-  border: none;
-  cursor: pointer;
+  border: 1px ${color.BLACK} solid;
   display: flex;
   justify-content: center;
   transition: all 0.2s ease-in-out ;
   letter-spacing: 0.02rem;
+  opacity: ${({disabled}) => disabled? '0.2' : '1'};
+  cursor: ${({disabled}) => disabled? 'not-allowed' : 'pointer'};
 
-  &:hover {
+  &:not([disabled]):hover {
     background-color: ${color.WHITE};;
     color: ${color.BLACK};;
     border: 1px solid ${color.BLACK};;
