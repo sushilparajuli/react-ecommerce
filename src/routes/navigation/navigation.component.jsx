@@ -6,8 +6,6 @@ import { ReactComponent as Logo } from '../../assets/images/e-clothing.svg';
 import { UserContext } from '../../contexts/user.context';
 import { CartContext } from '../../contexts/cart.context';
 import { signOutUser } from '../../utils/firebase';
-
-import './navigation.styles.jsx';
 import { NavContainer, LogoContainer, NavLinkContainer, NavLink } from './navigation.styles.jsx';
 
 const Navigation = () => {

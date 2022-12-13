@@ -41,9 +41,9 @@ export const GoogleSignInButton = styled(BaseButton)`
     border: 1px ${color.GOOGLE_PLUS} solid;
     color:  ${color.GOOGLE_PLUS};
 
-    &:hover {
-      background-color: ${darken(0.1,color.GOOGLE_PLUS)};
-      border-color: ${darken(0.2,color.GOOGLE_PLUS)};
+    &:not([disabled]):hover {
+      background-color: ${darken(0.05, color.GOOGLE_PLUS)};
+      border-color: ${darken(0.05,color.GOOGLE_PLUS)};
       color: ${color.WHITE};
     }
 
@@ -52,6 +52,7 @@ export const GoogleSignInButton = styled(BaseButton)`
         display: inline-flex;
         justify-self: center;
         align-self: center;
+        margin-left: 0.3rem;
     }
 `;
 

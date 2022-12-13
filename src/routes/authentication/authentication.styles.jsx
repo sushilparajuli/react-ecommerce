@@ -1,4 +1,6 @@
-.auth-container{
+import styled from 'styled-components';
+
+export const AuthContainer = styled.div`
     display: flex;
     max-width: 990px;
     justify-content: space-between;
@@ -15,4 +17,4 @@
             flex-direction: column;
         }
     }
-}
+`;

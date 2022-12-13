@@ -4,14 +4,10 @@ import {
   signInWithGooglePopup,
   signInAuthUserWithEmailAndPassword,
 } from '../../utils/firebase';
-
 import FormInput from '../../components/form-input/form-input.component';
 import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component';
 import { AiFillGoogleCircle } from 'react-icons/ai/index';
-
-
-
-import './sign-in-form.styles.scss';
+import {ButtonContainer} from './sign-in-form.styles.jsx';
 
 const defaultFormFields = {
   email: '',
@@ -82,7 +78,7 @@ const SignUpForm = () => {
           name="password"
           value={password}
         />
-        <div className="buttons-container">
+        <ButtonContainer>
           <Button buttonType={BUTTON_TYPE_CLASSES.inverted} type="submit">
             Sign In
           </Button>
@@ -91,7 +87,7 @@ const SignUpForm = () => {
             Sign in with Google
             <AiFillGoogleCircle />
           </Button>
-        </div>
+        </ButtonContainer>
       </form>
     </div>
   );
