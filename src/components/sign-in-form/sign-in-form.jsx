@@ -6,8 +6,10 @@ import {
 } from '../../utils/firebase';
 
 import FormInput from '../../components/form-input/form-input.component';
-import Button from '../../components/button/button.component';
+import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component';
 import { AiFillGoogleCircle } from 'react-icons/ai/index';
+
+
 
 import './sign-in-form.styles.scss';
 
@@ -81,11 +83,11 @@ const SignUpForm = () => {
           value={password}
         />
         <div className="buttons-container">
-          <Button buttonType="inverted" type="submit">
+          <Button buttonType={BUTTON_TYPE_CLASSES.inverted} type="submit">
             Sign In
           </Button>
 
-          <Button type="button" buttonType="google" onClick={signInWithGoogle}>
+          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={signInWithGoogle}>
             Sign in with Google
             <AiFillGoogleCircle />
           </Button>
