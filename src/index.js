@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 
 import { Provider } from 'react-redux';
-import { CartProvider } from './contexts/cart.context';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
@@ -14,10 +13,8 @@ root.render(
   <StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <CartProvider>
-          <GlobalStyles />
-          <App />
-        </CartProvider>
+        <GlobalStyles />
+        <App />
       </BrowserRouter>
     </Provider>
   </StrictMode>
