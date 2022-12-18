@@ -8,14 +8,18 @@ import { Provider } from 'react-redux';
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 import GlobalStyles from './GlobalStyles';
-import { store } from './store';
+import { persistor, store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+
 root.render(
   <StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <GlobalStyles />
-        <App />
-      </BrowserRouter>
+      <PersistGate persistor={persistor}>
+        <BrowserRouter>
+          <GlobalStyles />
+          <App />
+        </BrowserRouter>
+      </PersistGate>
     </Provider>
   </StrictMode>
 );
