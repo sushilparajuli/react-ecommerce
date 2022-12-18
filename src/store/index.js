@@ -2,6 +2,7 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 
 // import root Reducer
@@ -19,7 +20,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // logger middleware -> middleware run before dispatcher
 // eslint-disable-next-line no-undef
-const middlewares = [process.env.NODE_ENV  === 'development' && logger ].filter(Boolean);
+const middlewares = [process.env.NODE_ENV  === 'development' && logger, thunk].filter(Boolean);
 
 // config for showing store in devtools
 // eslint-disable-next-line no-undef 
