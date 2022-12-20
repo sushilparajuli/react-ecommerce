@@ -1,20 +1,19 @@
 import { useState } from 'react';
 
-import {
-  signInWithGooglePopup,
-  signInAuthUserWithEmailAndPassword,
-} from '../../utils/firebase';
 import FormInput from '../../components/form-input/form-input.component';
 import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component';
 import { AiFillGoogleCircle } from 'react-icons/ai/index';
 import {ButtonContainer} from './sign-in-form.styles.jsx';
-
+import { useDispatch } from 'react-redux';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 const defaultFormFields = {
   email: '',
   password: '',
 };
 
+
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { email, password } = formFields;
@@ -32,29 +31,31 @@ const SignUpForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    dispatch (emailSignInStart(email,password));
+    resetFields();
 
-    try {
-      await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-      resetFields();
-    } catch (err) {
-      switch (err.code) {
-      case 'auth/wrong-password':
-        alert('Incorrect password for the email');
-        break;
-      case 'auth/user-not-found':
-        alert('No user associated with this email');
-        break;
-      default:
-        console.log(err);
-      }
-    }
+    // try {
+    //   await signInAuthUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
+    //   resetFields();
+    // } catch (err) {
+    //   switch (err.code) {
+    //   case 'auth/wrong-password':
+    //     alert('Incorrect password for the email');
+    //     break;
+    //   case 'auth/user-not-found':
+    //     alert('No user associated with this email');
+    //     break;
+    //   default:
+    //     console.log(err);
+    //   }
+    // }
   };
 
-  const signInWithGoogle = async () => {
-    await signInWithGooglePopup();
+  const signInWithGoogle = () => {
+    dispatch(googleSignInStart());
   };
 
   return (

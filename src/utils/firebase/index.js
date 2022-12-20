@@ -104,12 +104,12 @@ export const createUserDocumentFromAuth = async (
       console.error('Error creating user', err);
     }
   }
-  return userDocRef;
+  return userSnapshot;
 };
 
 // getting collection and docs from firestore
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, 'categories');
+export const getCategoriesAndDocuments = async (key) => {
+  const collectionRef = collection(db, key);
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
@@ -138,3 +138,12 @@ export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
