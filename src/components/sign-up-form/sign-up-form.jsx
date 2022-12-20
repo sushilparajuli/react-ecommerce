@@ -1,15 +1,13 @@
 /* eslint-disable react/jsx-no-comment-textnodes */
 import { useState } from 'react';
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from '../../utils/firebase';
-
 import FormInput from '../../components/form-input/form-input.component';
 import Button from '../../components/button/button.component';
 
 import {SignUpContainer} from './sign-up-form.styles.jsx';
+import { useDispatch } from 'react-redux';
+import { signUpStart } from '../../store/user/user.action';
+
 
 const defaultFormFields = {
   displayName: '',
@@ -19,6 +17,7 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { displayName, email, password, confirmPassword } = formFields;
@@ -42,15 +41,7 @@ const SignUpForm = () => {
     }
 
     try {
-      // create user with email password
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      // insert into user db collections
-      const userRef = await createUserDocumentFromAuth(user, { displayName });
-      console.info('User created successfully', userRef);
+      dispatch (signUpStart(email, password, displayName));
       resetFields();
     } catch (err) {
       if (err.code === 'auth/email-already-in-use') {
@@ -59,6 +50,27 @@ const SignUpForm = () => {
         console.error('User creation encounter error', err);
       }
     }
+
+   
+
+    // try {
+    //   // create user with email password
+    //   const { user } = await createAuthUserWithEmailAndPassword(
+    //     email,
+    //     password
+    //   );
+
+    //   // insert into user db collections
+    //   const userRef = await createUserDocumentFromAuth(user, { displayName });
+    //   console.info('User created successfully', userRef);
+    //   resetFields();
+    // } catch (err) {
+    //   if (err.code === 'auth/email-already-in-use') {
+    //     alert('Cannot create user, email already in use');
+    //   } else {
+    //     console.error('User creation encounter error', err);
+    //   }
+    // }
   };
 
   return (
