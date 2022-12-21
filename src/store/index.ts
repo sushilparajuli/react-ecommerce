@@ -6,9 +6,10 @@ import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './root-saga';
 
 
+
 // import root Reducer
 import { rootReducer } from './root-reducer';
-
+export type RootState = ReturnType<typeof rootReducer>
 
 // persist store configuration
 const persistConfig = {
