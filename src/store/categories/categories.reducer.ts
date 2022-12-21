@@ -29,7 +29,7 @@ export const categoriesReducer = (state = CATEGORIES_INITIAL_STATE, action : Any
     return {
       ...state,
       categories: action.payload,
-      isLoading: true,
+      isLoading: false,
     };
   }
 
