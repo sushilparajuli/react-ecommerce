@@ -1,11 +1,11 @@
 import { darken } from 'polished';
 import styled from 'styled-components';
 
-const color   = {
-  GOOGLE_PLUS : '#DB4437',
-  WHITE: '#FFFFFF',
-  BLACK: '#000000',
-}; 
+enum color {
+  GOOGLE_PLUS  = '#DB4437',
+  WHITE = '#FFFFFF',
+  BLACK = '#000000',
+}
 
 export const BaseButton = styled.button`
   min-width: 165px;
@@ -25,8 +25,8 @@ export const BaseButton = styled.button`
   justify-content: center;
   transition: all 0.2s ease-in-out ;
   letter-spacing: 0.02rem;
-  opacity: ${({disabled}) => disabled? '0.2' : '1'};
-  cursor: ${({disabled}) => disabled? 'not-allowed' : 'pointer'};
+  opacity: ${({disabled}) => disabled ? '0.2' : '1'};
+  cursor: ${({disabled}) => disabled ? 'not-allowed' : 'pointer'};
 
   &:not([disabled]):hover {
     background-color: ${color.WHITE};;
@@ -66,4 +66,25 @@ export const InvertedButton = styled(BaseButton)`
     color: ${color.WHITE};
   }
 
+`;
+
+export const LoadingSpinner = styled.div`
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(195, 195, 195, 0.6);
+  border-radius: 50%;
+  border-top-color: #636767;
+  animation: spin 1s ease-in-out infinite;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  @keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes spin {
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
 `;
