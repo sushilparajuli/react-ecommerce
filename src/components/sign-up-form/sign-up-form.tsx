@@ -1,10 +1,10 @@
-/* eslint-disable react/jsx-no-comment-textnodes */
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
 
-import FormInput from '../../components/form-input/form-input.component';
-import Button from '../../components/button/button.component';
+import FormInput from '../form-input/form-input.component';
+import Button from '../button/button.component';
 
-import {SignUpContainer} from './sign-up-form.styles.jsx';
+import {SignUpContainer} from './sign-up-form.styles';
 import { useDispatch } from 'react-redux';
 import { signUpStart } from '../../store/user/user.action';
 
@@ -22,7 +22,7 @@ const SignUpForm = () => {
 
   const { displayName, email, password, confirmPassword } = formFields;
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value },
     } = event;
@@ -33,7 +33,7 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (password !== confirmPassword) {
       console.error('Both password should be same');
@@ -44,33 +44,13 @@ const SignUpForm = () => {
       dispatch (signUpStart(email, password, displayName));
       resetFields();
     } catch (err) {
-      if (err.code === 'auth/email-already-in-use') {
+      
+      if ((err as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
         alert('Cannot create user, email already in use');
       } else {
         console.error('User creation encounter error', err);
       }
     }
-
-   
-
-    // try {
-    //   // create user with email password
-    //   const { user } = await createAuthUserWithEmailAndPassword(
-    //     email,
-    //     password
-    //   );
-
-    //   // insert into user db collections
-    //   const userRef = await createUserDocumentFromAuth(user, { displayName });
-    //   console.info('User created successfully', userRef);
-    //   resetFields();
-    // } catch (err) {
-    //   if (err.code === 'auth/email-already-in-use') {
-    //     alert('Cannot create user, email already in use');
-    //   } else {
-    //     console.error('User creation encounter error', err);
-    //   }
-    // }
   };
 
   return (

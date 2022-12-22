@@ -1,9 +1,8 @@
-import { useState } from 'react';
-
-import FormInput from '../../components/form-input/form-input.component';
-import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component';
+import { useState, FormEvent, ChangeEvent } from 'react';
+import FormInput from '../form-input/form-input.component';
+import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component';
 import { AiFillGoogleCircle } from 'react-icons/ai/index';
-import {ButtonContainer} from './sign-in-form.styles.jsx';
+import {ButtonContainer} from './sign-in-form.styles';
 import { useDispatch } from 'react-redux';
 import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 const defaultFormFields = {
@@ -12,13 +11,14 @@ const defaultFormFields = {
 };
 
 
+
 const SignUpForm = () => {
   const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   const { email, password } = formFields;
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement> ) => {
     const {
       target: { name, value },
     } = event;
@@ -29,29 +29,10 @@ const SignUpForm = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch (emailSignInStart(email,password));
     resetFields();
-
-    // try {
-    //   await signInAuthUserWithEmailAndPassword(
-    //     email,
-    //     password
-    //   );
-    //   resetFields();
-    // } catch (err) {
-    //   switch (err.code) {
-    //   case 'auth/wrong-password':
-    //     alert('Incorrect password for the email');
-    //     break;
-    //   case 'auth/user-not-found':
-    //     alert('No user associated with this email');
-    //     break;
-    //   default:
-    //     console.log(err);
-    //   }
-    // }
   };
 
   const signInWithGoogle = () => {
